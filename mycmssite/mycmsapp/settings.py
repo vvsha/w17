@@ -114,6 +114,7 @@ MIDDLEWARE = (
 )
 
 INSTALLED_APPS = (
+    'suit',
     'djangocms_admin_style',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -197,3 +198,46 @@ THUMBNAIL_PROCESSORS = (
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters'
 )
+
+# vv++
+
+SUIT_CONFIG = {
+    'MENU': (
+
+        # Keep original label and models
+        # Храните оригинальные ярлыки и модели
+        'sites',
+
+        # Rename app and set icon
+        # Переименовать приложение и установить значок
+        {'app': 'auth', 'label': 'Authorization', 'icon':'icon-lock'},
+
+        # Reorder app models
+        # Изменить порядок моделей приложений
+        {'app': 'auth', 'models': ('user', 'group')},
+
+        # Custom app, with models
+        # Пользовательское приложение с моделями
+        {'label': 'Settings', 'icon':'icon-cog', 'models': ('auth.user', 'auth.group')},
+
+        # Cross-linked models with custom name; Hide default icon
+        # Сшитые модели с пользовательским именем; Скрыть значок по умолчанию
+        {'label': 'Custom', 'icon':None, 'models': (
+            'auth.group',
+            {'model': 'auth.user', 'label': 'Staff'}
+        )},
+
+        # Custom app, no models (child links)
+        # Пользовательское приложение, никакие модели (дочерние ссылки)
+        {'label': 'Users', 'url': 'auth.user', 'icon':'icon-user'},
+
+        # Separator
+        '-',
+
+        # Custom app and model with permissions
+        # Пользовательское приложение и модель с разрешениями
+        {'label': 'Secure', 'permissions': 'auth.add_user', 'models': [
+            {'label': 'custom-child', 'permissions': ('auth.add_user', 'auth.add_group')}
+        ]},
+    )
+}
