@@ -73,9 +73,7 @@ SITE_ID = 1
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-# ///        'DIRS': [os.path.join(BASE_DIR, 'mycmsapp', 'templates'),],
-        'DIRS': [], # ///
-        'APP_DIRS': True, # ++
+        'DIRS': [os.path.join(BASE_DIR, 'mycmsapp', 'templates'),],
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
@@ -120,7 +118,6 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'suit',
     'django.contrib.admin',
     'django.contrib.sites',
     'django.contrib.sitemaps',
